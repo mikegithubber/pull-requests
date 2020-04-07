@@ -1,0 +1,4 @@
+"The trick is to fix the problem you have, rather than the problem you want." - Bram Cohen
+  "Sometimes it pays to stay in bed on Monday, rather than spending the rest of the week debugging Monday's code." - Christopher Thompson
+  "The opposite of DRY would be WET (Write Everything Twice or We Enjoy Typing)." – The Pragmatic Programmers
+  
