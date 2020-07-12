@@ -42,8 +42,8 @@ git checkout-index -a - prebacuje sve fajlove iz Staging area u Working director
 git status - status git repositorijuma
 
 
-git config --global user.name "Aleksandar Zivanovic" - podesavanje username-a Git-a na racunaru
-git config --global user.email acas_mail@yahoo.com - podesavanje emaila Git-a na racunaru
+git config --global user.name "John Smithc" - podesavanje username-a Git-a na racunaru
+git config --global user.email email@email.com - podesavanje emaila Git-a na racunaru
 git config --global user.password "your password"
 git config --list - izlistavanje podesavanja Git-a
 
