@@ -1,0 +1,114 @@
+---------- Shall Commands ----------
+cd - odabir direktorijuma (cd Desktop)
+. - alias za trenutni folder
+.. - alias za prethodni (roditeljski) folder (cd ..)
+mkdir - kreiranje novog foldera (mkdir my-project)
+touch - kreiranje novog fajla (touch file.txt)
+rm - brisanje fajla ili foldera (rm file2.txt)
+rm -rf - brisanje foldera sa fajlovima (rm -rf NewFolder)
+ls - lista fajlova u folderu (ls)
+ls -l - lista fajlova sa detaljima bez hidden files/folders (ls -l)
+ls -la - lista fajlova sa detaljima i sa skrivenim fajlovima i folderima (ls -la)
+clear - brisanje teksta iz terminala
+start . - otvara folder u kome se radi na terminalu
+explorer . - isto sto i start .
+git init - inicijalizira Git u projektu
+pwd - pokazuje putanju u kome se direktorijumu nalazis
+(komanda) --help - pomoc oko odredjene komande (touch --help)
+TAB (taster na tastaturi) - sam zavrsava unetu komandu / lokaciju
+echo - Ispisuje tekst (kao i u PHP-u) (echo "Zeljeni tekst")
+> - pisanje u fajlu - ako je postojao neki tekst u fajlu, brise ga i ispisuje svoj tekst na njegovo mesto (echo "Ovo je neki tekst" > file.txt)
+>> - dodavanje testa u fajl (echo "Nova linija teksta" >> file.txt)
+cat - cita sadrzaj fajla (cat file.txt)
+nano - tekst editor (nano new-file.txt)
+exit - gasenje terminala
+find PUTANJA -type f - pronalazi sve fajlove po tipu (find .git/objects -type f)
+
+
+---------- Git Low-Level Commands ----------
+git hash-object
+echo "tekst koji zelimo" | git hash-object --stdin -w - pravi novi objekat u git repozitorijumu od tekst koji smo ispisali
+git hash-object <ime fajla> - samo ispisuje SHA1 hash za fajl. novi objekat NIJE napravljen u git repozitorijumu
+git hash-object <ime fajla> -w - pravi novi objekat za izabrani fajl u git repozitorijumu
+git cat-file
+git cat-file -p <hash> - Sadrzaj objekta
+git cat-file -s <hash> - Velicina objekta
+git cat-file -t <hash> - Tip objekta
+git mktree - Kreira Tree objekat (cat ../temp-tree.txt | git mktree)
+git read-tree <hash>
+git ls-files - ispisuje spisak svih fajlova u Staging area
+git ls-files -s - ispisuje spisak svih fajlova sa detaljima u Staging area
+git checkout-index -a - prebacuje sve fajlove iz Staging area u Working directory
+git status - status git repositorijuma
+
+
+git config --global user.name "Aleksandar Zivanovic" - podesavanje username-a Git-a na racunaru
+git config --global user.email acas_mail@yahoo.com - podesavanje emaila Git-a na racunaru
+git config --global user.password "your password"
+git config --list - izlistavanje podesavanja Git-a
+
+
+git add . - prebacuje sve Untracked files u Staging area - Staged
+git add <filename> - prebacujes fajl naveden u komandi iz Untracked u staged (git add file3.txt)
+git rm --cached <filename> - prebacuje fajl iz Staging area u untracked, pod uslovom da nije vrsen komit nad fajlom
+git commit -m <napomena> - prevbacuje iz Staging u Unmodified (Git repozitorijum) (git commit -m "Second commit"), tj. vrsi komit promene. Kreira se novi objekat u Git repozitorijumu
+git commit -a -m <napomena> - direktno prebacuje fajl/ove iz Untracked (Working directory) u Unmodified (Git repozitorijum) (git commit -m "Changed update_list.py" -a)
+git checkout <commit hash> - prebacivanje HEAD-a na odredjeni komit (git checkout 970f82335). nista drugo ne radi osim toga
+
+git commit --amend --author="Petar Petrovic <petarpetrovic@gmail.com>" - menja podatke o autoru poslednjeg komita
+
+---------- Git BRANCH Commands ----------
+git branch - lista lokalnih branch-eva
+git branch -r - lista remote branch-eva
+git branch -a - lista svih lokalnih i remote branch-eva
+git branch -vv - lista (lokalnih) tracking branch-eva i njima odgovarajucih remote branch-eva
+git branch <new branch name> - kreira novi branch (git branch temp) | ostaje na staroj grani, ne prelazi automatski na novokreiranu
+git branch -m <branch name> <branch new name> - preimenuje branch (git branch -m temp new-temp)
+git branch -d <branch name> - brise odredjeni branch - nije forced (git branch -d new-temp) | brise merged i prazne branch-eve
+git checkout <branch name> - prelazi na odredjeni branch (git checkout master) | ako se upise ime grane onda se prebacuje na nju, a ako se upise hash komita, onda se prebacuje na taj komit
+git checkout -b <new branch name> - kreira novi branch i automatski prelazi na njega (git checkout -b novs-grana)
+git merge <ime grane> - spajanje grane sa Master granom. da bi se ovo obavilo mora da se bude u (checkout) Master grani (git merge nova-grana)
+
+git diff - prikazuje promene u izmenjenoj verziji fajla
+
+cat <ime fajla> | git unpack-objects - raspakuje .pack fajl (cat pack-6bc62e424ba3c93ebeaaf00f42f544f41bba0ee9.pack | git unpack-objects) , NAPOMENA .pack fajl mora da se ukloni iz pack foldera, inace nece raspakovati fajlove u objects folder
+
+git clone <url> - kloniranje repozitorijuma/projekta sa cloud-a na komputer (git clone https://github.com/aleksandar-zivanovic/git-course.git)
+
+
+---------- Remote, Push -> , Fetch <- & Pull <--- ----------
+git remote - ispisuje ime remote repozitorijuma (servera)
+git remote -v - ispisuje ime remote repozitorijuma (servera) i url-ove za fetch i push
+git remote show <ime remote repozitorijuma/servera> - ispisuje detalje o remote repozitorijumima, koji su povezani sa lokalnim repozitorijumom (git remote show origin)
+git fetch - fetch remote changes and download them in local Git repository. will not modify working and staging area
+git merge FETCH_HEAD - spaja promene iz lokalnog git repozitorijuma (downloadovane sa remote servera - downloadovani komandom git fetch) sa lokalnim fajlovima i tako updatuje lokalne fajlove sa (ne azurira remote fajlove)
+git remote prune origin - only delete the refs to remote branches that no longer exist, npr. brisanje grane posle spajanja sa master granom
+git remote update origin --prune - azurira lokalne podatke o grani/branch-u koji je obrisan u remote repozitorijumu
+git pull - fetch and download content from a remote repository and immediately update the local repository to match that content.
+git pull -v - isto kao i git pull, samo sto izbacuje detalje dok radi
+git push - uploaduje izmene na server
+git push -v - uploaduje izmene na server i pokazuje detalje u terminalu
+git push -u -v origin <ime nove grane/branch-a> - uploaduje novi branch koji ne postoji na serveru i ispisuje detalje zbog komande -v
+git push -d origin <ime grane koja se brise> - brisanje remote branch-a iz konzole (git push -d origin temp)
+git show-ref - prikazuje reference za sve grane u lokalnom i remote repozitorijumu
+git show-ref <ime grane> - prikazuje reference za odabranu granu u lokalnom i remote repozitorijumu (git show-ref master)
+
+git remote add upstream <url forkovanog repozitorijuma> - dodavanje forkovanog upstream repozitorijuma (git remote add upstream https://github.com/bstashchuk/JavaScript-Bible-Basics.git)
+git fetch upstream -v - fetch sa upstream (forkovanog) repozitorijuma. Opcija -v ispisuje detalje
+git pull upstream master -v - pull sa upstream (forkovanog) repozitorijuma. Opcija -v ispisuje detalje
+git merge upstream/<ime grane> -v - merge sa odredjenom upstream granom. Opcija -v ispisuje detalje (git merge upstream/master -v)
+
+
+
+-------------------------
+Blob - sadrzi fajlove
+Tree - sadrzi informacije o fajlovima i/ili direktorijumima. Predstavlja folder ili direktorijum in Git
+Commit pomocu njega mozemo da sacuvamo razlicite verzije nasih programa
+Annotated Tag - sadrzi tekst koji pokazuje na odredjeni commit
+------------------------- MERGERING
+Fast Forward merge - moze da se napravi samo ako posle kreiranja grane, koja se spaja sa Master granom, nije bilo novih komita u Master grani. Ona se bukvalno dodaje master grani kao njen deo, tako sto se Head master grane prebacuje na poslednji komit grane koja se dodaje i onda obrisemo tu granu, a sve ostaje u Master-u, kao njegov deo
+3-way merge - izvrsava se ako je posle kreiranja grane, koja se spaja sa master granom, kreiran neki komit u master grani
+-------------------------
+origin - default ime za remote repozitorijum (server). ako je lokalni repozitorijum povezan sa vise remote repozitorijuma svi ce imati razlicita imena
+* kada se repozitorijum/projekat klonira fajl sa servera u lokalni repozitorijum, Git u lokalnom repozitorijumu pravi samo jedan tracking branch i to onaj branch, koji je default na remote repozitorijumu
+* tracking branch je lokalni branch (grana), koja je povezana sa odgovarajucom granom na remote repozitorijumu
