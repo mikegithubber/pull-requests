@@ -1,0 +1,9 @@
+body {
+    display: grid;
+    grid-template-columns: auto auto;    
+    grid-gap: 50px;
+    background-color: black;
+    color: lightgray;    
+    font-family: sans-serif;
+    font-size: small;
+}
