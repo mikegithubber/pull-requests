@@ -1,0 +1,1 @@
+I'm following Bodgan's course about Git and GitHub on Udemy.
