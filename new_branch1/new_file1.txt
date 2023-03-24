@@ -1,0 +1,2 @@
+New file in the new branch of the forked repo! I could have forked the repo, cloned it to the desktop, made some commits, pushed them locally, open a PR to the parent repo and finally.. ask the owner of parent repo to review the changes and merge the PR. 
+But im lazy so im doing it this way :) 
