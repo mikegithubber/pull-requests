@@ -1,1 +1,3 @@
 This is a test file in the new feature folder created by Bogdan
+
+I decided to make some other changes
