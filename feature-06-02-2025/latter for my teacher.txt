@@ -1,1 +1,3 @@
 Hi, my The best Teacher Bogdan Stashchuk.
+
+after git and gitHub, I have to continue learning Javascript.
