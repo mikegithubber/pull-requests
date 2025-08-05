@@ -1,0 +1,2 @@
+This is test file in the new folder created by Dmytro
+I decide to make some other changes
