@@ -1,0 +1,4 @@
+Test file with a test text in the new feature folder.
+
+Adding few new lines in the test.txt
+=)
