@@ -1,0 +1,3 @@
+Test file in a new feature folder.
+
+One more changes.
